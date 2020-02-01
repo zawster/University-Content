@@ -1,0 +1,23 @@
+﻿Build started 5/12/2018 2:51:29 PM.
+     1>Project "D:\Facebook_Visual_Studio\Project1\Project1.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\\" /AI"C:\Program Files (x86)\Windows Kits\8.0\References\CommonConfiguration\Neutral" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Facades\\" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib main.cpp
+         main.cpp
+     1>d:\facebook_visual_studio\project1\UserClass.h(51): error C2065: 'marshal_as' : undeclared identifier
+     1>d:\facebook_visual_studio\project1\UserClass.h(51): error C2275: 'std::string' : illegal use of this type as an expression
+     1>d:\facebook_visual_studio\project1\UserClass.h(52): error C2065: 'marshal_as' : undeclared identifier
+     1>d:\facebook_visual_studio\project1\UserClass.h(52): error C2275: 'std::string' : illegal use of this type as an expression
+     1>d:\facebook_visual_studio\project1\UserClass.h(53): error C2065: 'marshal_as' : undeclared identifier
+     1>d:\facebook_visual_studio\project1\UserClass.h(53): error C2275: 'std::string' : illegal use of this type as an expression
+     1>d:\facebook_visual_studio\project1\UserClass.h(54): error C2065: 'marshal_as' : undeclared identifier
+     1>d:\facebook_visual_studio\project1\UserClass.h(54): error C2275: 'std::string' : illegal use of this type as an expression
+     1>d:\facebook_visual_studio\project1\UserClass.h(55): error C2065: 'marshal_as' : undeclared identifier
+     1>d:\facebook_visual_studio\project1\UserClass.h(55): error C2275: 'std::string' : illegal use of this type as an expression
+     1>d:\facebook_visual_studio\project1\MyForm.h(196): error C2601: 'login' : local function definitions are illegal
+     1>d:\facebook_visual_studio\project1\MyForm.h(209): error C2039: 'show' : is not a member of 'Project1::MyForm2'
+                 d:\facebook_visual_studio\project1\MyForm2.h(15) : see declaration of 'Project1::MyForm2'
+     1>Done Building Project "D:\Facebook_Visual_Studio\Project1\Project1.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:01.10
