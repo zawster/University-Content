@@ -1,0 +1,60 @@
+Microsoft (R) Macro Assembler Version 6.15.8803		    08/21/14 18:30:13
+aa.asm							     Page 1 - 1
+
+
+				.model small
+				.stack 64
+ 0000				.data
+ 0000				.code
+ 0000 0000			start :    MOV AX,@DATA
+aa.asm(5) : error A2006: undefined symbol : DGROUP
+ 0000  8E D8			MOV DS,AX
+ 0002  B0 04			MOV AL,04H
+ 0004  F6 D0			NOT AL;1's complement
+ 0006  BE 3000			MOV SI,3000H    ;position where 1's complement will be stored
+ 0009  88 04			MOV [SI],AL
+ 000B  04 01			ADD AL,01H      ;2's complement
+ 000D  BE 2000			MOV SI,2000H      ;position to store 2's complement
+ 0010  88 04			MOV [SI],AL
+ 0012				END start
+aa.asm(14) : warning A4023: with /coff switch, leading underscore required for start address : start
+				.end
+Microsoft (R) Macro Assembler Version 6.15.8803		    08/21/14 18:30:13
+aa.asm							     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+STACK  . . . . . . . . . . . . .	16 Bit	 0040	  Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	16 Bit	 0000	  Word	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	16 Bit	 001D	  Word	  Public  'CODE'	
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+$$$00001 . . . . . . . . . . . .	P Near	 0000	  _TEXT	Length= 001D Private
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+start  . . . . . . . . . . . . .	L Near	 0000	  _TEXT	Public
+
+	   1 Warnings
+	   1 Errors

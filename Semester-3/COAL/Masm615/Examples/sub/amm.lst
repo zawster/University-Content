@@ -1,0 +1,280 @@
+Microsoft (R) Macro Assembler Version 6.15.8803		    08/21/14 10:04:06
+amm.asm							     Page 1 - 1
+
+
+				.MODEL SMALL
+				.STACK 100h
+ 0000				.DATA
+ 0000 0D 0A 41 64 64 69		choice_msg  db 13,10,'Addition or Subtraction?',13,10,'$' 
+       74 69 6F 6E 20 6F
+       72 20 53 75 62 74
+       72 61 63 74 69 6F
+       6E 3F 0D 0A 24
+
+ 001D 0D 0A 45 6E 74 65		first_msg   db 13,10,'Enter the first number:',13,10,'$'   
+       72 20 74 68 65 20
+       66 69 72 73 74 20
+       6E 75 6D 62 65 72
+       3A 0D 0A 24
+ 0039 0D 0A 45 6E 74 65		second_msg  db 13,10,'Enter the second number:',13,10,'$'    
+       72 20 74 68 65 20
+       73 65 63 6F 6E 64
+       20 6E 75 6D 62 65
+       72 3A 0D 0A 24
+ 0056 0D 0A 54 68 65 20		result_msg  db 13,10,'The result is:',13,10,'$'    
+       72 65 73 75 6C 74
+       20 69 73 3A 0D 0A
+       24
+ 0069 0D 0A 24			new_line    db 13,10,'$'    
+ 006C 00			val1        db ?    
+ 006D 00			num2        db ?    
+ 006E 00			num3        db ?    
+ 006F 00			num4        db ?      
+ 0070 0A			ten         db 10    
+
+ 0000				.CODE                       ;where the code is written
+
+ 0000				start:
+ 0000
+				mov ax, @data           ;Moves the address of the variables under .DATA into ax
+amm.asm(20) : error A2006: undefined symbol : DGROUP
+
+ 0000  8E D8			mov ds,ax           ;moves ax into ds. the two lines allow you to display string using the 21h interrupt sequence 9
+
+ 0002  B4 09			    mov ah,09
+ 0004  BA 0000 R		    mov dx, offset choice_msg
+ 0007  CD 21			    int 21h             ;displays the string in choice_msg
+
+ 0009  B4 01			    mov ah,01
+ 000B  CD 21			    int 21h             ;copies a value into the al, using subfunction 01
+				    mov val1,al         ;moves the value in the al to the variable val1
+amm.asm(30) : error A2074: cannot access label through segment registers
+
+				    cmp val1,'+'            ;compares the entered value in val1 with "+"
+amm.asm(32) : error A2074: cannot access label through segment registers
+ 000D  74 24			    je addition         ;if the enterd value is "+" then it jumps to addition else it jumps to subtraction
+
+ 0033				addition:
+ 0033  B4 09			    mov ah,09
+ 0035  BA 001D R		    mov dx, offset first_msg
+ 0038  CD 21			    int 21h             ;displays the string in first_msg
+
+ 003A  B4 01			    mov ah,01
+ 003C  CD 21			    int 21h             ;copies a value into the al, using subfunction 01
+ 003E  2C 30			    sub al,48           ;subtracts 48 from the vaule in the al
+				    mov num2,al         ;moves the value in the al to the variable num2
+amm.asm(43) : error A2074: cannot access label through segment registers
+
+ 0040  B4 01			    mov ah,01           
+ 0042  CD 21			    int 21h             ;copies a value into the al, using subfunction 01
+ 0044  2C 30			    sub al,48           ;subtracts 48 from the value in the al
+				    mov num3,al         ;moves the value in the al to the variable num3
+amm.asm(48) : error A2074: cannot access label through segment registers
+
+				    mov al,num2         ;moves the value in num2 into the al
+amm.asm(50) : error A2074: cannot access label through segment registers
+				    mul ten             ;multiplies the value in the al by ten
+amm.asm(51) : error A2074: cannot access label through segment registers
+				    add al,num3         ;adds the value in num3 to the al, to get the two-digit number
+amm.asm(52) : error A2074: cannot access label through segment registers
+				    mov num2,al         ;moves the two digit value into
+amm.asm(53) : error A2074: cannot access label through segment registers
+
+ 0046  B4 09			    mov ah,09
+ 0048  BA 0069 R		    mov dx, offset new_line 
+ 004B  CD 21			    int 21h             ;goes to the next line, i.e. "enter"
+
+ 004D  B4 09			    mov ah,09
+ 004F  BA 0039 R		    mov dx, offset second_msg   ;displays the string in second_msg
+ 0052  CD 21			    int 21h             
+
+ 0054  B4 01			    mov ah,01
+ 0056  CD 21			    int 21h             ;copies a value into the al, using subfunction 01
+ 0058  2C 30			    sub al,48           ;subtracts 48 from the value in the al
+				    mov num3,al         ;moves the new value in the al into the variable num3
+amm.asm(66) : error A2074: cannot access label through segment registers
+
+ 005A  B4 01			    mov ah,01
+ 005C  CD 21			    int 21h             ;copies a value into the al, using subfunction 01
+ 005E  2C 30			    sub al,48           ;subtracts 48 from the value in the al
+				    mov num4,al         ;moves the new value in the al into the variable num4
+amm.asm(71) : error A2074: cannot access label through segment registers
+
+				    mov al,num3         ;moves the value in num3 into the al
+amm.asm(73) : error A2074: cannot access label through segment registers
+				    mul ten             ;multiplies the value in the al by ten
+amm.asm(74) : error A2074: cannot access label through segment registers
+				    add al,num4         ;adds the value in num4 to the al, to get a two-digit number
+amm.asm(75) : error A2074: cannot access label through segment registers
+				    mov num3,al         ;moves the value in the al into the variable num3
+amm.asm(76) : error A2074: cannot access label through segment registers
+
+ 0060  B4 09			    mov ah,09
+ 0062  BA 0069 R		    mov dx, offset new_line
+ 0065  CD 21			    int 21h             ;goes to the next line, i.e. "enter"
+
+ 0067  B4 09			    mov ah,09
+ 0069  BA 0056 R		    mov dx, offset result_msg
+ 006C  CD 21			    int 21h             ;displays the string in reslut_msg
+
+				    ; mov the value of num 3 into bl
+				    mov bl, num3
+amm.asm(87) : error A2074: cannot access label through segment registers
+
+				    add num2,bl         ;adds num3 and num2 to form the sum
+amm.asm(89) : error A2074: cannot access label through segment registers
+				    add num2,48         ;adds 48 to num2
+amm.asm(90) : error A2074: cannot access label through segment registers
+
+
+				    mov al,num2
+amm.asm(93) : error A2074: cannot access label through segment registers
+ 006E  B4 02			    mov ah,02
+ 0070  8A D0			    mov dl, al
+ 0072  CD 21			    int 21h             ;displays the value that was in the al
+
+ 0074  B4 09			    mov ah,09
+ 0076  BA 0069 R		    mov dx, offset new_line
+ 0079  CD 21			    int 21h             ; goes to next line, i.e. "enter"
+
+ 007B  B8 4C00			    mov ax,4c00h
+ 007E  CD 21			    int 21h             ;ends the program
+
+
+ 013E				subtraction:
+ 013E  B4 09			    mov ah,09
+ 0140  BA 001D R		    mov dx, offset first_msg
+ 0143  CD 21			    int 21h             ;displays the string in first_msg
+
+ 0145  B4 01			    mov ah,01
+ 0147  CD 21			    int 21h             ;copies a value into the al, using subfunction 001
+ 0149  2C 30			    sub al,48           ;subtracts 48 from the value in the al
+				    mov num2,al         ;moves the value in the al into the variable num2
+amm.asm(114) : error A2074: cannot access label through segment registers
+
+ 014B  B4 01			    mov ah,01
+ 014D  CD 21			    int 21h             ;copies a value into the al, using subfunction 01
+ 014F  2C 30			    sub al,48           ;subtracts 48 from the value in the al
+				    mov num3,al         ;moves the value in the al into the variable num3
+amm.asm(119) : error A2074: cannot access label through segment registers
+
+				    mov al,num2         ;moves the value in num2 into the al
+amm.asm(121) : error A2074: cannot access label through segment registers
+				    mul ten             ;multiplies the value in the al by ten
+amm.asm(122) : error A2074: cannot access label through segment registers
+				    add al,num3         ;adds the value in num3 to the al, to get a two-digit number
+amm.asm(123) : error A2074: cannot access label through segment registers
+				    mov num2,al         ;moves the value in the al into the variable num2
+amm.asm(124) : error A2074: cannot access label through segment registers
+
+ 0151  B4 09			    mov ah,09
+ 0153  BA 0069 R		    mov dx, offset new_line 
+ 0156  CD 21			    int 21h             ;goes to the next line, i.e. "enter"
+
+ 0158  B4 09			    mov ah,09
+ 015A  BA 0039 R		    mov dx, offset second_msg
+ 015D  CD 21			    int 21h             ;displays the string in second_msg
+
+ 015F  B4 01			    mov ah,01
+ 0161  CD 21			    int 21h             ;copies a value into the al, using subfunction 01
+ 0163  2C 30			    sub al,48           ;subtracts 48 from the value in the al
+				    mov num3,al         ;moves the value in the al into the variable num3
+amm.asm(137) : error A2074: cannot access label through segment registers
+
+ 0165  B4 01			    mov ah,01
+ 0167  CD 21			    int 21h             ;copies a value into the al, using subfuntion 01
+ 0169  2C 30			    sub al,48           ;subtracts 48 from the value in the al
+				    mov num4,al         ;moves the value in the al into the variable num4
+amm.asm(142) : error A2074: cannot access label through segment registers
+
+				    mov al,num3         ;moves the value in num3 into the al
+amm.asm(144) : error A2074: cannot access label through segment registers
+				    mul ten             ;multiplies the value in the al by ten
+amm.asm(145) : error A2074: cannot access label through segment registers
+				    add al,num4         ;adds the value in num4 to the al, to get a two-digit number
+amm.asm(146) : error A2074: cannot access label through segment registers
+				    mov num3,al         ;moves the value in the al into the variable num3
+amm.asm(147) : error A2074: cannot access label through segment registers
+
+ 016B  B4 09			    mov ah,09
+ 016D  BA 0069 R		    mov dx, offset new_line
+ 0170  CD 21			    int 21h             ;goes to next line, i.e. "enter"
+
+ 0172  B4 09			    mov ah,09
+ 0174  BA 0056 R		    mov dx, offset result_msg
+ 0177  CD 21			    int 21h             ;displays the string in result_msg
+
+				    mov bl, num3        ;move value of num3 to bl
+amm.asm(157) : error A2074: cannot access label through segment registers
+
+				    sub num2,bl         ;subtracts the value in num3 from the value in num2
+amm.asm(159) : error A2074: cannot access label through segment registers
+				    add num2,48         ;adds 48 to the new value in num2
+amm.asm(160) : error A2074: cannot access label through segment registers
+				    mov al,num2         ;moves the value in num2 into the al
+amm.asm(161) : error A2074: cannot access label through segment registers
+ 0179  B4 02			    mov ah,02
+ 017B  8A F0			    mov dh,al
+ 017D  CD 21			    int 21h             ;displays the resulting value
+
+ 017F  B4 09			    mov ah,09
+ 0181  BA 0069 R		    mov dx, offset new_line
+ 0184  CD 21			    int 21h             ;goes to the next line, i.e. "enter"
+
+ 0186  B8 4C00			    mov ax,4c00h
+ 0189  CD 21			    int 21h             ;ends the program
+ 018B
+				END
+Microsoft (R) Macro Assembler Version 6.15.8803		    08/21/14 10:04:06
+amm.asm							     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+STACK  . . . . . . . . . . . . .	16 Bit	 0100	  Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	16 Bit	 0071	  Word	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0249	  Word	  Public  'CODE'	
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+$$$00001 . . . . . . . . . . . .	P Near	 0000	  _TEXT	Length= 0249 Private
+  addition . . . . . . . . . . .	L Near	 0033	  _TEXT	
+  subtraction  . . . . . . . . .	L Near	 013E	  _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+addition . . . . . . . . . . . .	L Near	 0033	  _TEXT	
+choice_msg . . . . . . . . . . .	Byte	 0000	  _DATA	
+first_msg  . . . . . . . . . . .	Byte	 001D	  _DATA	
+new_line . . . . . . . . . . . .	Byte	 0069	  _DATA	
+num2 . . . . . . . . . . . . . .	Byte	 006D	  _DATA	
+num3 . . . . . . . . . . . . . .	Byte	 006E	  _DATA	
+num4 . . . . . . . . . . . . . .	Byte	 006F	  _DATA	
+result_msg . . . . . . . . . . .	Byte	 0056	  _DATA	
+second_msg . . . . . . . . . . .	Byte	 0039	  _DATA	
+start  . . . . . . . . . . . . .	L Near	 0000	  _TEXT	
+subtraction  . . . . . . . . . .	L Near	 013E	  _TEXT	
+ten  . . . . . . . . . . . . . .	Byte	 0070	  _DATA	
+val1 . . . . . . . . . . . . . .	Byte	 006C	  _DATA	
+
+	   0 Warnings
+	   35 Errors

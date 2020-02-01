@@ -1,0 +1,142 @@
+Microsoft (R) Macro Assembler Version 6.15.8803		    08/21/14 09:58:51
+am.asm							     Page 1 - 1
+
+
+				.model small
+				.stack 100h
+ 0000				.data
+
+ 0000 0D 0A 45 6E 74 65		first db 13,10, 'Enter 1st Number: $'
+       72 20 31 73 74 20
+       4E 75 6D 62 65 72
+       3A 20 24
+ 0015 0D 0A 45 6E 74 65		second db 13,10, 'Enter 2nd Number: $'
+       72 20 32 6E 64 20
+       4E 75 6D 62 65 72
+       3A 20 24
+ 002A 0D 0A 52 65 73 75		result db 13,10, 'Result: $'
+       6C 74 3A 20 24
+ 0035 0D 0A 49 6E 76 61		invalid db 13,10, 'Invalid Number!!! $'
+       6C 69 64 20 4E 75
+       6D 62 65 72 21 21
+       21 20 24
+
+ 0000				.code
+
+ 0000				start:
+ 0000  B8 0003			        mov ax,03
+ 0003  CD 10			        int 10h
+
+				        mov ax,@data
+am.asm(16) : error A2006: undefined symbol : DGROUP
+ 0005  8E D8			        mov ds,ax
+
+ 0012				mn:
+ 0012  BA 0000 R		        mov dx, offset first
+ 0015  B4 09			        mov ah,9
+ 0017  CD 21			        int 21h
+
+ 0019  B4 01			        mov ah,1
+ 001B  CD 21			        int 21h
+
+ 001D  8A C8			        mov cl,al
+
+ 001F  3C 30			        cmp al,30h
+ 0021  7C 06			        jl nvalid
+ 0023  3C 39			        cmp al,39h
+ 0025  7F 02			        jg nvalid
+ 0027  EB 09			        jmp proceed
+
+ 0029				nvalid:
+ 0029  BA 0035 R		        mov dx,offset invalid
+ 002C  B4 09			        mov ah,9
+ 002E  CD 21			        int 21h
+ 0030  EB E0			        jmp mn
+
+ 0032				proceed:
+ 0032  80 E9 30			        sub cl,30h
+
+ 0035  BA 0015 R		        mov dx,offset second
+ 0038  B4 09			        mov ah,9
+ 003A  CD 21			        int 21h
+ 003C  B4 01			        mov ah,1
+ 003E  CD 21			        int 21h
+
+ 0040  3C 30			        cmp al,30h
+ 0042  7C E5			        jl nvalid
+ 0044  3C 39			        cmp al,39h
+ 0046  7F E1			        jg nvalid
+ 0048  2C 30			        sub al,30h
+
+ 004A  32 E4			        xor ah,ah
+ 004C  02 C1			        add al,cl
+ 004E  37			        aaa
+
+ 004F  8B C8			        mov cx,ax
+ 0051  81 C1 3030		        add cx,3030h
+ 0055  BA 002A R		        mov dx, offset result
+ 0058  B4 09			        mov ah,9
+ 005A  CD 21			        int 21h
+
+ 005C  B4 02			        mov ah,2
+ 005E  8A D5			        mov dl,ch
+ 0060  CD 21			        int 21h
+
+ 0062  8A D1			        mov dl,cl
+ 0064  CD 21			        int 21h
+
+ 0066				exit:
+ 0066  B4 4C			        mov ah,4ch
+ 0068  CD 21			        int 21h
+ 006A
+Microsoft (R) Macro Assembler Version 6.15.8803		    08/21/14 09:58:51
+am.asm							     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+STACK  . . . . . . . . . . . . .	16 Bit	 0100	  Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	16 Bit	 004A	  Word	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	16 Bit	 006A	  Word	  Public  'CODE'	
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+$$$00001 . . . . . . . . . . . .	P Near	 0000	  _TEXT	Length= 006A Private
+  mn . . . . . . . . . . . . . .	L Near	 0012	  _TEXT	
+  nvalid . . . . . . . . . . . .	L Near	 0029	  _TEXT	
+  proceed  . . . . . . . . . . .	L Near	 0032	  _TEXT	
+  exit . . . . . . . . . . . . .	L Near	 0066	  _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+exit . . . . . . . . . . . . . .	L Near	 0066	  _TEXT	
+first  . . . . . . . . . . . . .	Byte	 0000	  _DATA	
+invalid  . . . . . . . . . . . .	Byte	 0035	  _DATA	
+mn . . . . . . . . . . . . . . .	L Near	 0012	  _TEXT	
+nvalid . . . . . . . . . . . . .	L Near	 0029	  _TEXT	
+proceed  . . . . . . . . . . . .	L Near	 0032	  _TEXT	
+result . . . . . . . . . . . . .	Byte	 002A	  _DATA	
+second . . . . . . . . . . . . .	Byte	 0015	  _DATA	
+start  . . . . . . . . . . . . .	L Near	 0000	  _TEXT	
+
+	   0 Warnings
+	   2 Errors

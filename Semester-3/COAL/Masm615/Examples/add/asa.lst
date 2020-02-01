@@ -1,0 +1,72 @@
+Microsoft (R) Macro Assembler Version 6.15.8803		    08/20/14 11:02:00
+asa.asm							     Page 1 - 1
+
+
+
+				.model small
+ 0000				.data
+ 0000 1234			 opr1 dw 1234h
+ 0002 0002			 opr2 dw 0002h
+ 0004  0001 [			 result dw 01 dup(?),'$'
+        0000
+       ] 0024
+ 0000				.code
+ 0000				        mov ax,@data
+asa.asm(8) : error A2006: undefined symbol : DGROUP
+ 0000  8E D8			        mov ds,ax
+				        mov ax,opr1
+asa.asm(10) : error A2074: cannot access label through segment registers
+				        mov bx,opr2
+asa.asm(11) : error A2074: cannot access label through segment registers
+ 0002  F8			        clc
+ 0003  03 C3			        add ax,bx
+ 0005  BF 0004 R		        mov di,offset result
+ 0008  89 05			        mov [di], ax
+
+ 000A  B4 09			        mov ah,09h
+ 000C  BA 0004 R		        mov dx,offset result
+ 000F  CD 21			        int 21h
+
+ 0011  B4 4C			        mov ah,4ch
+ 0013  CD 21			        int 21h
+ 0015				        end
+Microsoft (R) Macro Assembler Version 6.15.8803		    08/20/14 11:02:00
+asa.asm							     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+_DATA  . . . . . . . . . . . . .	16 Bit	 0008	  Word	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0036	  Word	  Public  'CODE'	
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+$$$00001 . . . . . . . . . . . .	P Near	 0000	  _TEXT	Length= 0036 Private
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+opr1 . . . . . . . . . . . . . .	Word	 0000	  _DATA	
+opr2 . . . . . . . . . . . . . .	Word	 0002	  _DATA	
+result . . . . . . . . . . . . .	Word	 0004	  _DATA	
+
+	   0 Warnings
+	   3 Errors
