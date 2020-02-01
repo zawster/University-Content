@@ -1,0 +1,8 @@
+#
+#"Followinng are the requirements of my function to generate graphs."
+#
+file1.txt
+file2.txt
+temp.txt
+temp1.txt
+final.txt
